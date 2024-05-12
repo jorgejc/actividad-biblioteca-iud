@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AutoresController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +16,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::prefix('/autores')->group(function () {
+    Route::get('/', [AutoresController::class, 'index'])->name('autores');
+    Route::get('/crear', [AutoresController::class, 'create'])->name('autores.crear');
+    Route::post('/guardar', [AutoresController::class, 'store'])->name('autores.guardar');
+    Route::get('/editar/{autor}', [AutoresController::class, 'edit'])->name('autores.editar');
+    Route::put('/editar/{autor}', [AutoresController::class, 'update'])->name('autores.actualizar');
 });
